@@ -82,7 +82,7 @@ public class Follows_DAO {
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_FOLLOWINGS_BY_FOLLOWER_ID);
         preparedStatement.setString(1, follower_email);
-         
+        System.out.println(preparedStatement);
         ResultSet resultSet = preparedStatement.executeQuery();
          
         while (resultSet.next()) {
@@ -107,13 +107,11 @@ public class Follows_DAO {
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_FOLLOWERS_BY_FOLLOWING_ID);
         preparedStatement.setString(1, following_email);
-         
+        System.out.println(preparedStatement);
         ResultSet resultSet = preparedStatement.executeQuery();
          
         while (resultSet.next()) {
             String follower_email = resultSet.getString("follower_email");
-           
-            
             Follows follow = new Follows(follower_email, following_email);
             FollowingsList.add(follow);
         }

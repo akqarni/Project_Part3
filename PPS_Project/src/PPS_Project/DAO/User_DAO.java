@@ -168,7 +168,7 @@ public class User_DAO {
         return rowDeleted;     
     }
     
- // Delete all users
+    // Delete all users
     public void deleteAllUsers () throws SQLException {
     	// Step 1: Establishing a Connection
     	connect_func();
@@ -203,8 +203,10 @@ public class User_DAO {
     	// Step 1: Establishing a Connection
     	connect_func();
         System.out.println("inside User_DAO: user.getPPS_balance(): "+ user.getPPS_balance());
+        
         //System.out.println("inside User_DAO: dollar_amount from form: "+ dollar_amount);
     	//double newBalance = user.getDollar_balance() + dollar_amount;
+        
     	// Step 2: Create a statement using connection object
         preparedStatement = (PreparedStatement) connect.prepareStatement(UPDATE_USER_PPS_BALANCE_BY_ID);
         preparedStatement.setLong(1, user.getPPS_balance());
@@ -213,8 +215,7 @@ public class User_DAO {
          
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
-        return rowUpdated;    
-    				
+        return rowUpdated;		
     }
 
     
