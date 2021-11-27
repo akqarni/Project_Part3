@@ -29,6 +29,7 @@ Follows_DAO Follows = new Follows_DAO();
 List <Follows> followers_list = Follows.selectALLFollowersByFollowingID(user.getUser_email());
 List <Follows> following_list = Follows.selectALLFollowingsByFollowerID(user.getUser_email());
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,8 +82,7 @@ List <Follows> following_list = Follows.selectALLFollowingsByFollowerID(user.get
 				<button type="submit" class="btn btn-success">Follow</button>
 				
 				</form>
-				
-				<caption><h2>Followers List</h2></caption>
+				<caption><h3>Followers List</h3></caption>
         <br>
         <table border="1" cellpadding="5">
             <%
@@ -98,8 +98,8 @@ List <Follows> following_list = Follows.selectALLFollowingsByFollowerID(user.get
 			}
 			%>
         </table>
-			
-		<caption><h2>Following List</h2></caption>
+		<br> <br>
+		<caption><h3>Following List</h3></caption>
         <br>
         <table border="1" cellpadding="5">           
             <%

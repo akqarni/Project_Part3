@@ -7,7 +7,6 @@ public class Follows {
     
     
 	public Follows(String follower_email, String following_email) {
-		super();
 		this.follower_email = follower_email;
 		this.following_email = following_email;
 	}

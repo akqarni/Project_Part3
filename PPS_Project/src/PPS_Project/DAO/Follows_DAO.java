@@ -16,7 +16,7 @@ import PPS_Project.bean.User;
 public class Follows_DAO {
 	
 	private Connection connect = null;
-	private Statement statement = null;
+	//private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
@@ -94,7 +94,7 @@ public class Follows_DAO {
         }
          
         resultSet.close();
-        statement.close();
+        //statement.close();
          
         return FollowingsList;
 	}
@@ -117,7 +117,7 @@ public class Follows_DAO {
         }
          
         resultSet.close();
-        statement.close();
+        //statement.close();
          
         return FollowingsList;
 	}
