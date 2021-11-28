@@ -6,6 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import PPS_Project.bean.Follows;
+import PPS_Project.bean.User;
 
 public class Root_part3_DAO {
 	
@@ -17,15 +22,10 @@ public class Root_part3_DAO {
 	
 	
 	// ALL SQL QUERIRES
-	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (email, pass, fname, lname, address, dob, PPS_balance, dollar_balance) VALUES "
-			+ " (?, ?, ?, ?, ?, ?, ?, ?);";
-	private static final String SELECT_USER_BY_ID = "select email, pass, fname, lname, address, dob, PPS_balance, dollar_balance from users where email = ?";
-	private static final String SELECT_ALL_USERS  = "select * from users;";
-	private static final String DELETE_USERS_SQL  = "delete from users where email = ?;";
-	private static final String DELETE_ALL_USERS_SQL  = "delete * from users;";
-	private static final String UPDATE_USER_DOLLAR_BALANCE_SQL  = "update users set dollar_balance = ? where email = ?;";
-	private static final String UPDATE_USER_PPS_BALANCE_BY_ID = "update users set PPS_balance = ? where email = ?";
-	private static final String VALIDATE_USER_SQL = "select fname, lName, address, dob, PPS_balance, dollar_balance from users where email = ? and pass = ?";
+	private static final String SELECT_ALL_USERS_EMAILS  = "select email from users;";
+	private static final String SELECT_COMMON_FOLLOWERS  = "Select f1.follower_email \n"
+			+ "from follows f1, follows f2\n"
+			+ "where f1.follower_email = f2.follower_email and f1.following_email = ? and f2.following_email = ?;";
 	
 	
 	public Root_part3_DAO() {
@@ -50,5 +50,55 @@ public class Root_part3_DAO {
         	connect.close();
         }
     }
+    
+ // Retrieve all users' emails
+    public List<User> allUsersEmails () throws SQLException {
+		List<User> userEmailsList = new ArrayList<User>(); 
+        
+        connect_func();
+         
+        // Step 2:Create a statement using connection object
+        statement =  (Statement) connect.createStatement();
+        
+        // Step 3: execute
+        resultSet = statement.executeQuery(SELECT_ALL_USERS_EMAILS); 
+         
+        while (resultSet.next()) {
+        	// Don't show the root in the select list 
+        	if(!resultSet.getString("email").equalsIgnoreCase("root")) {
+        		String email = resultSet.getString("email");
+            	User user = new User(email);
+            	userEmailsList.add(user);
+        	}	
+        }
+         
+        resultSet.close();
+        return userEmailsList;
+	}
+    
+    // Retrieve all users emails
+    public List <String> commonFollowersEmails (String firstUserEmail, String secondUserEmail) throws SQLException {
+        List<String> commonFollowersList = new ArrayList<String>(); 
+        
+        connect_func();
+         
+        preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_COMMON_FOLLOWERS);
+        preparedStatement.setString(1, firstUserEmail);
+        preparedStatement.setString(2, secondUserEmail);
+        System.out.println(preparedStatement);
+        ResultSet resultSet = preparedStatement.executeQuery();
+         
+        while (resultSet.next()) {
+            String follower_email = resultSet.getString("follower_email");
+            commonFollowersList.add(follower_email);
+        }
+         
+        resultSet.close();
+        //statement.close();
+         
+        return commonFollowersList;
+	}
+    
+    
 
 }

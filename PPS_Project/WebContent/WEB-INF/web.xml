@@ -81,6 +81,17 @@
 		<servlet-name>DepositWithdraw_Servlet</servlet-name>
 		<url-pattern>/withdraw</url-pattern>
 	</servlet-mapping>
+	
+  <servlet>
+  <servlet-name>Project_part3_Servlet</servlet-name>
+  <servlet-class>PPS_Project.web.servlets.Project_part3_Servlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+		<servlet-name>Project_part3_Servlet</servlet-name>
+		<url-pattern>/findCommonFollowers</url-pattern>
+	</servlet-mapping>
+	
 
   
   

@@ -46,6 +46,14 @@ public class User {
 		this.PPS_balance = pPS_balance;
 		this.dollar_balance = dollar_balance;
 	}
+	
+	
+
+
+	public User(String user_email) {
+		super();
+		this.user_email = user_email;
+	}
 
 
 	public String getUser_email() {
