@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud.Projection;
 
+import PPS_Project.DAO.Follows_DAO;
 import PPS_Project.DAO.User_DAO;
+import PPS_Project.bean.Follows;
 import PPS_Project.bean.User;
 
 /**
@@ -25,7 +27,8 @@ public class User_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private User_DAO userDAO;
 	private project1 project;
-       
+     private Follows_DAO followdao; 
+     private User user;
     /** 
      * @see HttpServlet#HttpServlet()
      */
@@ -41,6 +44,8 @@ public class User_Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		userDAO = new User_DAO();
 		project=new project1();
+		followdao=new Follows_DAO();
+		
 	}
 	
 	/**
@@ -94,6 +99,10 @@ public class User_Servlet extends HttpServlet {
             case "/initialize": 
     		    System.out.println("The action is: initialize");
     				intializeDatabase(request, response);   	
+    		    break;
+            case "/follow": 
+    		    System.out.println("The action is: follow");
+    				follow(request, response);   	
     		    break;
             default:
                 System.out.println("Not sure which action, we will treat it as the list action");
@@ -262,6 +271,73 @@ public class User_Servlet extends HttpServlet {
     	
 		//response.sendRedirect("login");
 	}
+    
+    // Insert follower
+    private void follow(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, IOException, ServletException {
+    	String errorMessage = "";
+      	HttpSession session = request.getSession(false);
+    		if (session == null) {
+    			// User not signed in. Or session expired.
+    			// Forward to user login page.
+    			request.getRequestDispatcher("user-loginForm.jsp").forward(request, response);
+    			return;
+    		}
+    		
+    		User user = (User) session.getAttribute("user");
+    		if (user == null) {
+    			// User not signed in. Or session expired.
+    			// Forward to user login page.
+    			request.getRequestDispatcher("user-loginForm.jsp").forward(request, response);
+    			return;
+    		}
+           String follower_email=user.getUser_email();
+    
+
+    	String  following_email =request.getParameter("receiver-email");
+    	System.out.println(following_email);
+    	
+    	User user1 = userDAO.selectUser(following_email);
+  
+    	if(user1!=null)
+    	{
+    		Follows follow=new Follows(user.getUser_email(),following_email);
+    		followdao.insertFollow(follow);
+    		request.setAttribute("message", "Successful");
+			request.getRequestDispatcher("user-followersPage.jsp").forward(request, response);
+    	}
+    	else {
+    		request.setAttribute("errorMessage", "Invalid Email");
+			request.getRequestDispatcher("user-followersPage.jsp").forward(request, response);
+    	}
+		//response.sendRedirect("login");
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
     // Delete a user

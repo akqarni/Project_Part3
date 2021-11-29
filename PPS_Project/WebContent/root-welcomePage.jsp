@@ -36,6 +36,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background:white;
 }
 
 .topnav {
@@ -78,16 +79,16 @@ body {
 	</header>
 
 
-<div class="topnav">
+	<div class="topnav">
   <a class="active" href="#home">Frequent buyers</a>
-  <a href="#news">Biggest buy</a>
-  <a href="#news">Biggest buyers</a>
+  <a href="biggest_buy.jsp">Biggest buy</a>
+  <a href="biggest_buyer.jsp">Biggest buyers</a>
   <a href="#news">Popular users</a>
   <a href="root-commonUsers.jsp">Common users</a>
-  <a href="#news">Neverbuy users</a>
-  <a href="#news">Neversell users</a>
+  <a href="neverbuy_users.jsp">Neverbuy users</a>
+  <a href="neversell_user.jsp">Neversell users</a>
   <a href="#news">Lucky users</a>
-  <a href="#news">Inactive users</a>
+  <a href="inactive_user.jsp">Inactive users</a>
   <a href="#news">Statistics</a>
   <a href="log-out">Logout</a>
 </div>
