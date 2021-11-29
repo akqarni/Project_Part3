@@ -105,7 +105,6 @@ body {
 			    <form action="initialize" method="post">
 
 				<button type="submit" class="btn btn-success"> Initialize Database </button>
-				<a href="root-allProjectInfo.jsp" class="btn btn-success"> PPS Project Updates </a>
 				</form>
 			</div>
 			

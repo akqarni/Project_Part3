@@ -100,6 +100,8 @@ public class Project_part3_Servlet extends HttpServlet {
 			
 			String firstUserEmail = request.getParameter("firstUserEmail");
 			String secondUserEmail = request.getParameter("secondUserEmail");
+			request.setAttribute("firstUserEmail", firstUserEmail);
+			request.setAttribute("secondUserEmail", secondUserEmail);
 			
 			List <String> commonFollowers =  root_DAO.commonFollowersEmails(firstUserEmail,secondUserEmail);
 			System.out.println("commonFollowers.size() " + commonFollowers.size());

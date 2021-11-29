@@ -81,7 +81,7 @@ public class Root_part3_DAO {
         List<String> commonFollowersList = new ArrayList<String>(); 
         
         connect_func();
-         
+        
         preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_COMMON_FOLLOWERS);
         preparedStatement.setString(1, firstUserEmail);
         preparedStatement.setString(2, secondUserEmail);

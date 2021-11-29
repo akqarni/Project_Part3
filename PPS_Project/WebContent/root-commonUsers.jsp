@@ -69,10 +69,17 @@ List <String> commonFollowers = (List) request.getAttribute("commonFollowers");
         <select name = "firstUserEmail">
             <%
 				for (User user1 : usersEmailsList) {
+					if(user1.getUser_email().equals(request.getAttribute("firstUserEmail"))){
 			%>
-			<option value = <%=user1.getUser_email()%> > <%=user1.getUser_email()%> </option>
+			<option value = <%=user1.getUser_email()%> selected > <%=user1.getUser_email()%> </option>
         
             <%
+					}
+					else {
+						%>
+						<option value = <%=user1.getUser_email()%> > <%=user1.getUser_email()%> </option>
+						<%
+					}
 			}
 			%>
        
@@ -81,10 +88,17 @@ List <String> commonFollowers = (List) request.getAttribute("commonFollowers");
          <select name = "secondUserEmail">
             <%
 				for (User user2 : usersEmailsList) {
+					if(user2.getUser_email().equals(request.getAttribute("secondUserEmail"))){
 			%>
-			<option value = <%=user2.getUser_email()%> > <%=user2.getUser_email()%> </option>
+			<option value = <%=user2.getUser_email() %> selected > <%=user2.getUser_email()%> </option>
         
             <%
+					}
+					else {
+						%>
+						<option value = <%=user2.getUser_email()%> > <%=user2.getUser_email()%> </option>
+						<%
+					}
 			}
 			%>
        
