@@ -68,6 +68,7 @@ public class Project_part3_Servlet extends HttpServlet {
                 System.out.println("The action is: findCommonFollowers");
                 findCommonFollowers(request, response);
                 break;
+           
             default:
                 System.out.println("Not sure which action, we will treat it as the list action");
                 break;
@@ -136,4 +137,18 @@ public class Project_part3_Servlet extends HttpServlet {
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

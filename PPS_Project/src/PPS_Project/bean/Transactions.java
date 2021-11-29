@@ -12,7 +12,7 @@ public class Transactions {
 	private String transaction_from_email;
 	private String transaction_to_email;
 	private double PPS_price;
-	
+	private int sum_of_pps;
 	
 	public Transactions() {}
 	
@@ -69,6 +69,14 @@ public class Transactions {
 		this.transaction_time = transaction_time;
 		this.dollar_amount = dollar_amount;
 		this.PPS_amount = pPS_amount;
+	}
+	
+	
+	
+	public Transactions(String transaction_to_email,int sum_of_pps)
+	{
+		this.transaction_to_email=transaction_to_email;
+		this.sum_of_pps=sum_of_pps;
 	}
 
 	public int getTransaction_ID() {
@@ -148,7 +156,9 @@ public class Transactions {
 	}
 	
 	
-	
+	public int get_total_pps() {
+		return sum_of_pps;
+	}
 	
 	
 	
