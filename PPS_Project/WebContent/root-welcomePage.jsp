@@ -80,16 +80,16 @@ body {
 
 
 	<div class="topnav">
-  <a class="active" href="#home">Frequent buyers</a>
+  <a class="active" href="root-frequentUsers.jsp">Frequent buyers</a>
   <a href="biggest_buy.jsp">Biggest buy</a>
   <a href="biggest_buyer.jsp">Biggest buyers</a>
-  <a href="#news">Popular users</a>
+  <a href="root-popularUsers.jsp">Popular users</a>
   <a href="root-commonUsers.jsp">Common users</a>
   <a href="neverbuy_users.jsp">Neverbuy users</a>
   <a href="neversell_user.jsp">Neversell users</a>
-  <a href="#news">Lucky users</a>
+  <a href="root-luckyUsers.jsp">Lucky users</a>
   <a href="inactive_user.jsp">Inactive users</a>
-  <a href="#news">Statistics</a>
+  <a href="root-systemStatistics.jsp">Statistics</a>
   <a href="log-out">Logout</a>
 </div>
 

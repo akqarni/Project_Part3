@@ -13,7 +13,8 @@ if(request.getParameter("activityList") == null) {
 
 <%
 Root_part3_DAO Root_DAO = new Root_part3_DAO();           // listed in attribute 'transactions list'
-List <User> User_list =Root_DAO.getAllInactiveUser();
+String [][] systemStatistics =Root_DAO.systemStatistics();
+
 %>
  
 
@@ -26,7 +27,7 @@ List <User> User_list =Root_DAO.getAllInactiveUser();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inactive Users</title>
+<title>System Statistics</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -78,14 +79,9 @@ body {
 			</div>
 		</nav>
 </header>
-	
-	
-	
 
-
-
-	<div class="topnav">
-  <a class="active" href="root-frequentUsers.jsp">Frequent buyers</a>
+<div class="topnav">
+  <a class="active" href="#home">Frequent buyers</a>
   <a href="biggest_buy.jsp">Biggest buy</a>
   <a href="biggest_buyer.jsp">Biggest buyers</a>
   <a href="root-popularUsers.jsp">Popular users</a>
@@ -94,32 +90,31 @@ body {
   <a href="neversell_user.jsp">Neversell users</a>
   <a href="root-luckyUsers.jsp">Lucky users</a>
   <a href="inactive_user.jsp">Inactive users</a>
-  <a href="#news">Statistics</a>
+  <a href="root-systemStatistics.jsp">Statistics</a>
   <a href="log-out">Logout</a>
-  </div>
+</div>
 
 <div align="center">
-        <caption><h2>Inactive Users</h2></caption>
+        <caption><h2>System Statistics</h2></caption>
         <br>
         <table border="1" cellpadding="5">
             <tr>
-                <th>Inactive User</th>
-                
+                <th>Operation</th>
+                <th>Count</th> 
             </tr>
             
        
-             <%
-				for (User user : User_list) {
-			%>
+             <% for(int i = 0; i < systemStatistics.length; i++){ %>
+						<tr>
+						<% for (int j = 0; j < systemStatistics[0].length; j++){ %>
+							
+							   <td>   <%= systemStatistics[i][j] %>          </td>
+						  
+						<% } %>
+						</tr>
+				 <% } %>
 			
-			<tr>
-				   <td>  <%=user.getUser_email()%>           </td>
-				   
-			</tr>
-
-			<%
-			}
-			%>
+			
             
            
             

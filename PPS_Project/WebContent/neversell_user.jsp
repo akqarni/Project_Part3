@@ -22,7 +22,7 @@ if(request.getParameter("activityList") == null) {
 
 <%
 Root_part3_DAO Root_DAO = new Root_part3_DAO();          // listed in attribute 'transactions list'
-List <Transactions> transactions_list = Root_DAO .get_neversell_user();
+List <Transactions> transactions_list = Root_DAO.get_neversell_user();
 %>
  
 
@@ -35,7 +35,7 @@ List <Transactions> transactions_list = Root_DAO .get_neversell_user();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Activity page</title>
+<title>Neversell Users</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -87,17 +87,15 @@ body {
 		</nav>
 </header>
 	
-	<a href="log-out" class="btn btn-fail" style ="float:right">Logout</a>
-	
 	<div class="topnav">
-  <a class="active" href="#home">Frequent buyers</a>
+  <a class="active" href="root-frequentUsers.jsp">Frequent buyers</a>
   <a href="biggest_buy.jsp">Biggest buy</a>
   <a href="biggest_buyer.jsp">Biggest buyers</a>
-  <a href="#news">Popular users</a>
+  <a href="root-popularUsers.jsp">Popular users</a>
   <a href="root-commonUsers.jsp">Common users</a>
   <a href="neverbuy_users.jsp">Neverbuy users</a>
   <a href="neversell_user.jsp">Neversell users</a>
-  <a href="#news">Lucky users</a>
+  <a href="root-luckyUsers.jsp">Lucky users</a>
   <a href="inactive_user.jsp">Inactive users</a>
   <a href="#news">Statistics</a>
   <a href="log-out">Logout</a>

@@ -288,7 +288,7 @@ public class Buy_and_Sell_Servlet extends HttpServlet {
 	    			newsellTransaction.setTransaction_time(LocalTime.now().toString());
 	    			newsellTransaction.setDollar_amount(required_dollar_balance);
 	    			newsellTransaction.setPPS_amount(PPS_Amount);
-	    			newsellTransaction.setTransaction_name("sell");
+	    			newsellTransaction.setTransaction_name("SELL");
 	    			newsellTransaction.setTransaction_from_email(user.getUser_email());
 	    			newsellTransaction.setTransaction_to_email("root");
 	    			newsellTransaction.setPPS_price(currentPPS_price);

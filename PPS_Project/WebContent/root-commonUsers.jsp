@@ -37,6 +37,37 @@ List <String> commonFollowers = (List) request.getAttribute("commonFollowers");
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 12px 14px;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
 
 </head>
 <body>
@@ -52,8 +83,21 @@ List <String> commonFollowers = (List) request.getAttribute("commonFollowers");
 			</div>
 		</nav>
 </header>
-	
-	<a href="log-out" class="btn btn-fail" style ="float:right">Logout</a>
+
+<div class="topnav">
+  <a class="active" href="#home">Frequent buyers</a>
+  <a href="biggest_buy.jsp">Biggest buy</a>
+  <a href="biggest_buyer.jsp">Biggest buyers</a>
+  <a href="root-popularUsers.jsp">Popular users</a>
+  <a href="root-commonUsers.jsp">Common users</a>
+  <a href="neverbuy_users.jsp">Neverbuy users</a>
+  <a href="neversell_user.jsp">Neversell users</a>
+  <a href="root-luckyUsers.jsp">Lucky users</a>
+  <a href="inactive_user.jsp">Inactive users</a>
+  <a href="#news">Statistics</a>
+  <a href="log-out">Logout</a>
+</div>	
+
 	
 	<h3 class="container col-md-5" style="float:center"> Hello <%=userName%>! </h3>
 

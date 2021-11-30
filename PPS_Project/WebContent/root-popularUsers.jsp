@@ -13,7 +13,7 @@ if(request.getParameter("activityList") == null) {
 
 <%
 Root_part3_DAO Root_DAO = new Root_part3_DAO();           // listed in attribute 'transactions list'
-List <User> User_list =Root_DAO.getAllInactiveUser();
+List <User> User_list =Root_DAO.allPopularUsers();
 %>
  
 
@@ -26,7 +26,7 @@ List <User> User_list =Root_DAO.getAllInactiveUser();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inactive Users</title>
+<title>Popular Users</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -78,14 +78,9 @@ body {
 			</div>
 		</nav>
 </header>
-	
-	
-	
 
-
-
-	<div class="topnav">
-  <a class="active" href="root-frequentUsers.jsp">Frequent buyers</a>
+<div class="topnav">
+  <a class="active" href="#home">Frequent buyers</a>
   <a href="biggest_buy.jsp">Biggest buy</a>
   <a href="biggest_buyer.jsp">Biggest buyers</a>
   <a href="root-popularUsers.jsp">Popular users</a>
@@ -96,14 +91,14 @@ body {
   <a href="inactive_user.jsp">Inactive users</a>
   <a href="#news">Statistics</a>
   <a href="log-out">Logout</a>
-  </div>
+</div>
 
 <div align="center">
-        <caption><h2>Inactive Users</h2></caption>
+        <caption><h2>Popular Users</h2></caption>
         <br>
         <table border="1" cellpadding="5">
             <tr>
-                <th>Inactive User</th>
+                <th>Popular User</th>
                 
             </tr>
             
