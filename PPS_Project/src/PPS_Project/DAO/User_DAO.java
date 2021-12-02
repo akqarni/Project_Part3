@@ -21,8 +21,8 @@ public class User_DAO {
 	
 	
 	// ALL SQL QUERIRES
-	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (email, pass, fname, lname, address, dob, PPS_balance, dollar_balance) VALUES "
-			+ " (?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (email, pass, fname, lname, address, dob, PPS_balance, dollar_balance, setting) VALUES "
+			+ " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_USER_BY_ID = "select email, pass, fname, lname, address, dob, PPS_balance, dollar_balance, setting from users where email = ?";
 	private static final String SELECT_ALL_USERS  = "select * from users;";
 	private static final String DELETE_USERS_SQL  = "delete from users where email = ?;";
@@ -72,6 +72,7 @@ public class User_DAO {
 		preparedStatement.setString(6, user.getUser_dob());
 		preparedStatement.setLong(7, user.getPPS_balance());
 		preparedStatement.setDouble(8, user.getDollar_balance());
+		preparedStatement.setString(9, user.getUser_settings());
 		System.out.println(preparedStatement);
 		
 		// Step 3: Execute the query or update query		

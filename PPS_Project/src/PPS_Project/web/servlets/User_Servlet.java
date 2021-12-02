@@ -247,9 +247,10 @@ public class User_Servlet extends HttpServlet {
 				String address = request.getParameter("address");
 				String dob = request.getParameter("dob");
 				long PPS_balance = 0;
+				String default_settings = "10111111";
 				double dollar_balance = 0.0;
 				
-				User newUser = new User(email, password,  fname, lname, address, dob, PPS_balance, dollar_balance);
+				User newUser = new User(email, password,  fname, lname, address, dob, PPS_balance, dollar_balance, default_settings);
 				
 				userDAO.insertUser(newUser);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("user-loginForm.jsp");
