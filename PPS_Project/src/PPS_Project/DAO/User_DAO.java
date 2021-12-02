@@ -23,13 +23,14 @@ public class User_DAO {
 	// ALL SQL QUERIRES
 	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (email, pass, fname, lname, address, dob, PPS_balance, dollar_balance) VALUES "
 			+ " (?, ?, ?, ?, ?, ?, ?, ?);";
-	private static final String SELECT_USER_BY_ID = "select email, pass, fname, lname, address, dob, PPS_balance, dollar_balance from users where email = ?";
+	private static final String SELECT_USER_BY_ID = "select email, pass, fname, lname, address, dob, PPS_balance, dollar_balance, setting from users where email = ?";
 	private static final String SELECT_ALL_USERS  = "select * from users;";
 	private static final String DELETE_USERS_SQL  = "delete from users where email = ?;";
 	private static final String DELETE_ALL_USERS_SQL  = "delete * from users;";
 	private static final String UPDATE_USER_DOLLAR_BALANCE_SQL  = "update users set dollar_balance = ? where email = ?;";
 	private static final String UPDATE_USER_PPS_BALANCE_BY_ID = "update users set PPS_balance = ? where email = ?";
-	private static final String VALIDATE_USER_SQL = "select fname, lName, address, dob, PPS_balance, dollar_balance from users where email = ? and pass = ?";
+	private static final String UPDATE_USER_SETTINGS_BY_ID = "update users set setting = ? where email = ?";
+	private static final String VALIDATE_USER_SQL = "select fname, lName, address, dob, PPS_balance, dollar_balance, setting from users where email = ? and pass = ?";
 	
 	
 	public User_DAO() {
@@ -104,9 +105,11 @@ public class User_DAO {
 			String dob = rs.getString("dob");
 			long PPS_balance = rs.getLong("PPS_balance");
 			double dollar_balance = rs.getDouble("dollar_balance");
+			String setting = rs.getString("setting");
+			
 			System.out.println("email: "+ email+ "password: "+ password);
 			
-			user = new User(email, password, fname, lname, address, dob, PPS_balance,dollar_balance);
+			user = new User(email, password, fname, lname, address, dob, PPS_balance,dollar_balance, setting);
 			
 		}
 		
@@ -140,9 +143,10 @@ public class User_DAO {
 			String dob = rs.getString("dob");
 			long PPS_balance = rs.getLong("PPS_balance");
 			double dollar_balance = rs.getDouble("dollar_balance");
+			String setting = rs.getString("setting");
 			System.out.println("email: "+ user_email+ "password: "+ user_password);
 			
-			User user = new User(user_email, user_password, fname, lname, address, dob, PPS_balance,dollar_balance);
+			User user = new User(user_email, user_password, fname, lname, address, dob, PPS_balance,dollar_balance, setting);
 			return user;
 			
 		}
@@ -150,8 +154,6 @@ public class User_DAO {
 			return null;
 		}
 	}
-    
- 
         
     // Delete user
     public boolean deleteUser (String email) throws SQLException {
@@ -204,12 +206,29 @@ public class User_DAO {
     	connect_func();
         System.out.println("inside User_DAO: user.getPPS_balance(): "+ user.getPPS_balance());
         
-        //System.out.println("inside User_DAO: dollar_amount from form: "+ dollar_amount);
-    	//double newBalance = user.getDollar_balance() + dollar_amount;
+        // System.out.println("inside User_DAO: dollar_amount from form: "+ dollar_amount);
+    	// double newBalance = user.getDollar_balance() + dollar_amount;
         
     	// Step 2: Create a statement using connection object
         preparedStatement = (PreparedStatement) connect.prepareStatement(UPDATE_USER_PPS_BALANCE_BY_ID);
         preparedStatement.setLong(1, user.getPPS_balance());
+        preparedStatement.setString(2, user.getUser_email());
+        System.out.println(preparedStatement);
+         
+        boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowUpdated;		
+    }
+    
+    public boolean updateUserSetting(User user) throws SQLException {
+    	// Step 1: Establishing a Connection
+    	connect_func();
+        System.out.println("inside User_DAO: user.getUser_settings(): "+ user.getUser_settings());
+        
+        
+    	// Step 2: Create a statement using connection object
+        preparedStatement = (PreparedStatement) connect.prepareStatement(UPDATE_USER_SETTINGS_BY_ID);
+        preparedStatement.setString(1, user.getUser_settings());
         preparedStatement.setString(2, user.getUser_email());
         System.out.println(preparedStatement);
          

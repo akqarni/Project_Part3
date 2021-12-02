@@ -79,6 +79,7 @@ public class project1 {
     			+ "    dob date,\r\n"
     			+ "    PPS_balance long,\r\n"
     			+ "    dollar_balance DOUBLE,\r\n"
+    			+ "    setting varchar(10),\r\n"
     			+ "    primary key (email)\r\n"
     			+ ")";
     	
@@ -117,17 +118,17 @@ public class project1 {
     	String dropPPS_priceTable_SQL = "drop table if exists PPS_price";
     	
     	// Intialize all tables
-    	String intializeUserTable = "insert into users (email,pass,fname,lname,address,dob,PPS_balance,dollar_balance) values"
-    			+ "('jbjb@yahoo.com','1234','Sahr','Ahmed','ctg','2012-11-12',0,0),"
-    			+ "('effat@gmail.com','1234','Effat','Fazel','ctg','2012-11-12',0,0),"
-    			+ "('jbxsjb@gmail.com','1234','Reem','','Alqarni','2012-11-12',0,0),"
-    			+ "('gdfgd@gmail.com','1234','Rami','Saad','ctg','2012-11-12',0,0),"
-    			+ "('rofdgfgot@gmail.com','1234','Saad','AlAli','ctg','2012-11-12',0,0),"
-    			+ "('bit@gmail.com','1234','Afnan','Alqarni','ctg','2012-11-12',0,0),"
-    			+ "('tre@gmail.com','1234','Sara','Alix','ctg','2012-11-12',0,0),"
-    			+ "('ret@gmail.com','1234','Ali','Alzh','ctg','2012-11-12',0,0),"
-    			+ "('roofwert@gmail.com','1234','Ahmed','Oufi','ctg','2012-11-12',0,0),"
-    			+ "('ef@gmail.com','1234','Roaa','Ali','ctg','2012-01-12',0,0);";
+    	String intializeUserTable = "insert into users (email,pass,fname,lname,address,dob,PPS_balance,dollar_balance, setting) values"
+    			+ "('jbjb@yahoo.com','1234','Sahr','Ahmed','ctg','2012-11-12',0,0,10111111),"
+    			+ "('effat@gmail.com','1234','Effat','Fazel','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('jbxsjb@gmail.com','1234','Reem','','Alqarni','2012-11-12',0,0, 10111111),"
+    			+ "('gdfgd@gmail.com','1234','Rami','Saad','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('rofdgfgot@gmail.com','1234','Saad','AlAli','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('bit@gmail.com','1234','Afnan','Alqarni','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('tre@gmail.com','1234','Sara','Alix','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('ret@gmail.com','1234','Ali','Alzh','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('roofwert@gmail.com','1234','Ahmed','Oufi','ctg','2012-11-12',0,0, 10111111),"
+    			+ "('ef@gmail.com','1234','Roaa','Ali','ctg','2012-01-12',0,0, 10111111);";
     	
     	String intializeFollowTable = "insert into follows(follower_email,following_email) values"
     			+ "('ef@gmail.com','ret@gmail.com'), "

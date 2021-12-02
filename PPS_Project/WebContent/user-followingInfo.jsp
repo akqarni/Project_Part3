@@ -25,9 +25,7 @@ String userName = user.getUser_fname() + " " + user.getUser_lname();
     
     
     <%
-Follows_DAO Follows = new Follows_DAO();       
-List <Follows> followers_list = Follows.selectALLFollowersByFollowingID(user.getUser_email());
-List <Follows> following_list = Follows.selectALLFollowingsByFollowerID(user.getUser_email());
+    List <String> followingInfo = (List) request.getAttribute("followingInfo");
 %>
 
 <!DOCTYPE html>
@@ -61,9 +59,7 @@ List <Follows> following_list = Follows.selectALLFollowingsByFollowerID(user.get
 
     <a href="user-balancePage.jsp" class="btn">Your balance</a>
     <a href="user-activityPage.jsp" class="btn">Activity list</a>
-    
-   
-				
+   	
 				<br> <br>	   
 			 
 		<div class="container col-md-5">
@@ -73,48 +69,30 @@ List <Follows> following_list = Follows.selectALLFollowingsByFollowerID(user.get
 			<h5 style="align: center; color:red"><%=((errorMessage == null) || (errorMessage.trim().equals(""))) ? "" : (errorMessage)%></h5>
 			<h5 style="align: center; color:green"><%=((message == null) || (message.trim().equals(""))) ? "" : (message)%></h5>
 			
-			<form action="follow" method="post">
-				<fieldset class="form-group">
-					<label> Enter email to follow </label> <input type="text"
-						value="" class="form-control"
-						name="receiver-email" required="required" >
-				</fieldset>
-				<button type="submit" class="btn btn-success">Follow</button>
-				
-				</form>
-				<caption><h3>Followers List</h3></caption>
-        <br>
-        <table border="1" cellpadding="5">
-            <%
-				for (Follows Follow : followers_list) {
-			%>
+			<br>
 			
-			<tr>
-				   <td>  <%=Follow.getFollower_email()%>         </td>
-							
-			</tr>
-
-			<%
-			}
-			%>
-        </table>
-		<br> <br>
-		<caption><h3>Following List</h3></caption>
-        <br>
-        <table border="1" cellpadding="5">           
-            <%
-				for (Follows Follow : following_list) {
-			%>
+					 <%
+// Iterating through commonFollowersList
+if(request.getAttribute("followingInfo") != null)  // Null check for the object
+{
+	%>
+	<table cellspacing="2" cellpadding="2"  border="1" >
+    <tr><th>Following Info: </th></tr>	 
+	<%
+	for (String info : followingInfo) {
+	%>
+	<tr>
+	<td>  <%=info%>           </td>
+	</tr>
+	<%
+	}
+	%>
+	</table>
+	<%
+}
+    %>		
 			
-			<tr>
-				   <td>  <a href= "showFollowingInfo?followingEmail=<%=Follow.getFollowing_email()%>" > <%=Follow.getFollowing_email()%>   </a>      </td>
-							
-			</tr>
-
-			<%
-			}
-			%>
-        </table>
+    </div> 
 				
 			</div>
 		</div>

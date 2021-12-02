@@ -11,6 +11,10 @@ public class User {
 	private String user_dob;
 	private long PPS_balance;
 	private double dollar_balance;
+	private String user_settings; 
+
+	
+
 
 	public User(String user_fname, String user_lname, String user_address, String user_dob) {
 		super();
@@ -48,6 +52,19 @@ public class User {
 	}
 	
 	
+	public User(String user_email, String user_password, String user_fname, String user_lname, String user_address,
+			String user_dob, long pPS_balance, double dollar_balance, String user_settings) {
+		super();
+		this.user_email = user_email;
+		this.user_password = user_password;
+		this.user_fname = user_fname;
+		this.user_lname = user_lname;
+		this.user_address = user_address;
+		this.user_dob = user_dob;
+		PPS_balance = pPS_balance;
+		this.dollar_balance = dollar_balance;
+		this.user_settings = user_settings;
+	}
 
 
 	public User(String user_email) {
@@ -120,6 +137,14 @@ public class User {
 		this.dollar_balance = dollar_balance;
 	}
 	
+	public String getUser_settings() {
+		return user_settings;
+	}
+
+
+	public void setUser_settings(String user_settings) {
+		this.user_settings = user_settings;
+	}
 	
 	
 	

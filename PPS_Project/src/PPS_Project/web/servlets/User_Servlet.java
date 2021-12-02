@@ -2,6 +2,8 @@ package PPS_Project.web.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -91,11 +93,10 @@ public class User_Servlet extends HttpServlet {
                 System.out.println("The action is: edit");
                 showEditForm(request, response);
                 break;
-                /*
-            case "/update":
-                System.out.println("The action is: update");
-                updateUser(request, response);
-                break;*/
+            case "/showFollowingInfo":
+                System.out.println("The action is: showFollowingInfo");
+                showFollowingInfo(request, response);
+                break;
             case "/initialize": 
     		    System.out.println("The action is: initialize");
     				intializeDatabase(request, response);   	
@@ -313,32 +314,6 @@ public class User_Servlet extends HttpServlet {
 		//response.sendRedirect("login");
 	}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     // Delete a user
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) 
@@ -385,7 +360,6 @@ public class User_Servlet extends HttpServlet {
         	dispatcher.forward(request, response);	
     	} catch (Exception e) {
     		RequestDispatcher dispatcher = request.getRequestDispatcher("root-welcomePage.jsp");
-        	String message = "Intialization completed! <br>";
     		request.setAttribute("errorMessage", "Can not intialize the database");
         	dispatcher.forward(request, response);
     		
@@ -396,6 +370,60 @@ public class User_Servlet extends HttpServlet {
     // Default: show dashboard page
     private void showDashboardPage (HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		//request.setAttribute("listUser", listUser);
+		//dispatcher.forward(request, response);
+	}
+    
+ // Default: show dashboard page
+    private void showFollowingInfo (HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+    	try {
+    		String followingEmail = request.getParameter("followingEmail");
+    		User FollowingUser = userDAO.selectUser(followingEmail);
+    		//System.out.println("FollowingUser is null ? "+ FollowingUser == null);
+    		//"10111111"
+    		//"01234567"
+    		String setting = FollowingUser.getUser_settings();
+    		System.out.println("FE: "+ followingEmail + " Setting: "+ setting);
+    		List <String> userInfo = new ArrayList <String>();
+    		if (setting.charAt(0) == '1') {
+    			userInfo.add("User email: "+ FollowingUser.getUser_email());
+    		}
+    		if (setting.charAt(2) == '1') {
+    			userInfo.add("First Name: "+ FollowingUser.getUser_fname());
+    		}
+    		if (setting.charAt(3) == '1') {
+    			userInfo.add("Last Name: "+ FollowingUser.getUser_lname());
+    		}
+    		if (setting.charAt(4) == '1') {
+    			userInfo.add("Address: "+ FollowingUser.getUser_address());
+    		}
+    		if (setting.charAt(5) == '1') {
+    			userInfo.add("Birthday: "+ FollowingUser.getUser_dob());
+    		}
+    		if (setting.charAt(6) == '1') {
+    			userInfo.add("PPS balance: "+ FollowingUser.getPPS_balance());
+    		}
+    		if (setting.charAt(7) == '1') {
+    			userInfo.add("Dollar balance: "+ FollowingUser.getDollar_balance());
+    		}
+    		
+    		//System.out.println("userInfo.isEmpty()"+ userInfo.isEmpty());
+    		
+    		
+    		request.setAttribute("followingInfo", userInfo);
+        	RequestDispatcher dispatcher = request.getRequestDispatcher("user-followingInfo.jsp");
+        	//String message = "??<br>";
+    		//request.setAttribute("message", message);
+        	dispatcher.forward(request, response);	
+    	} catch (Exception e) {
+    		System.out.println(e);
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("user-followersPage.jsp");
+    		request.setAttribute("errorMessage", "Can not show following information");
+        	dispatcher.forward(request, response);
+    		
+    	}
+    	
 		//request.setAttribute("listUser", listUser);
 		//dispatcher.forward(request, response);
 	}
