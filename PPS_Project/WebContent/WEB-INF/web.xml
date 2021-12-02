@@ -38,6 +38,11 @@
 	
 	<servlet-mapping>
 		<servlet-name>User_Servlet</servlet-name>
+		<url-pattern>/selectinfo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>User_Servlet</servlet-name>
 		<url-pattern>/initialize</url-pattern>
 	</servlet-mapping>
 	

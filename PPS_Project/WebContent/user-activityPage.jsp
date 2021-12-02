@@ -69,6 +69,7 @@ List <Transactions> transactions_list = Transactions.getAllTransactionsOfUser(us
     <a href="user-buyPage.jsp" class="btn">buy</a>
     <a href="user-sellPage.jsp" class="btn">sell</a>
      <a href="user-followersPage.jsp" class="btn">Followers list</a>
+       <a href="select_information.jsp" class="btn">setting</a>
 
 <div align="center">
         <caption><h2>Activity List</h2></caption>

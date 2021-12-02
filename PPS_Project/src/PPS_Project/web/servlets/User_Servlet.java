@@ -105,6 +105,10 @@ public class User_Servlet extends HttpServlet {
     		    System.out.println("The action is: follow");
     				follow(request, response);   	
     		    break;
+            case "/selectinfo": 
+    		    System.out.println("The action is:selectinfo");
+    				selectinfo(request, response);   	
+    		    break;
             default:
                 System.out.println("Not sure which action, we will treat it as the list action");
                 showDashboardPage(request, response);           	
@@ -428,6 +432,124 @@ public class User_Servlet extends HttpServlet {
 		//request.setAttribute("listUser", listUser);
 		//dispatcher.forward(request, response);
 	}
+    
+    
+    
+    
+    
+    
+    private void selectinfo (HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+    	String errorMessage = "";
+      	HttpSession session = request.getSession(false);
+    	User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// User not signed in. Or session expired.
+			// Forward to user login page.
+			request.getRequestDispatcher("user-loginForm.jsp").forward(request, response);
+			return;
+		}
+    	System.out.println("reached");
+    	try { StringBuilder settinginfo = new StringBuilder(" ");
+    		
+    	
+    	if(request.getParameter("check1") != null) {
+            settinginfo.insert(0,'1');
+        }
+        else {settinginfo.insert(0,'0');
+           
+        }
+    	settinginfo.insert(1,'0');
+        if(request.getParameter("check2") != null) {
+        	settinginfo.insert(2,'1');
+        }
+        else {
+        	settinginfo.insert(2,'0');
+        }
+
+        if(request.getParameter("check3") != null) {
+        	settinginfo.insert(3,'1');
+        }
+        else {
+        	settinginfo.insert(3,'0');
+        }
+        if(request.getParameter("check4") != null) {
+        	settinginfo.insert(4,'1');
+        }
+        else {
+        	settinginfo.insert(4,'0');
+        }
+        
+        if(request.getParameter("check5") != null) {
+        	settinginfo.insert(5,'1');
+        }
+        else {
+        	settinginfo.insert(5,'0');
+        }
+        if(request.getParameter("check6") != null) {
+        	settinginfo.insert(6,'1');
+        }
+        else {
+        	settinginfo.insert(6,'0');
+        }
+        if(request.getParameter("check7") != null) {
+        	settinginfo.insert(7,'1');
+        }
+        else {
+        	settinginfo.insert(7,'0');
+        }
+    	System.out.println("thevalue of settinginfo   "+ settinginfo);
+    	 String settings=settinginfo.toString();
+    	
+    	user.setUser_settings(settings);
+    	
+    	userDAO.updateUserSetting(user);
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("select_information.jsp");
+    	//String message = "??<br>";
+		//request.setAttribute("message", message);
+    	dispatcher.forward(request, response);
+    	
+    	
+    	
+        	
+        		
+    	} catch (Exception e) {
+    		System.out.println(e);
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("select_information.jsp");
+    		request.setAttribute("errorMessage", "Error");
+        	dispatcher.forward(request, response);
+    	}
+    	
+		//request.setAttribute("listUser", listUser);
+		//dispatcher.forward(request, response);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
 
