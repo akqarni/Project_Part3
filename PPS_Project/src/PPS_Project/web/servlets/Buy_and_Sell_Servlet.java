@@ -186,17 +186,24 @@ public class Buy_and_Sell_Servlet extends HttpServlet {
 	    			request.getRequestDispatcher("user-buyPage.jsp").forward(request, response);
 					
 				} else {
-					request.setAttribute("errorMessage", "No enough dollars");
+					String errorMsg = "You don't have enough dollars. Required: " + required_dollar_amount +" $";
+					request.setAttribute("errorMessage", errorMsg);
 					request.getRequestDispatcher("user-buyPage.jsp").forward(request, response);
 					return;
 				}
 				
 			}
 			
+			else {
+				request.setAttribute("errorMessage", "No enough PPS to buy");
+				request.getRequestDispatcher("user-buyPage.jsp").forward(request, response);
+				return;
+			}
+			
 			return;
 		} catch (Exception e) {
 			System.out.println(e);
-			request.setAttribute("errorMessage", "Error Occurred. Could NOT update the balance.");
+			request.setAttribute("errorMessage", "Error Occurred. Couldn't buy PPS");
 			request.getRequestDispatcher("user-buyPage.jsp").forward(request, response);
 			return;
 		}
@@ -254,9 +261,9 @@ public class Buy_and_Sell_Servlet extends HttpServlet {
 			latestPPSprice=new PPS_Price(updated_pps_price);
 			
 			
-			if(PPS_Amount<=seller_pps_amount)
+			if(PPS_Amount <= seller_pps_amount)
 			{
-				if(root_current_dollar_balance>= required_dollar_balance)
+				if(root_current_dollar_balance >= required_dollar_balance)
 				{
 					
 					//update pps price
@@ -303,7 +310,12 @@ public class Buy_and_Sell_Servlet extends HttpServlet {
 				}	
 				
 			}
-			
+			else {
+				String errorMsg =  "You don't have enough PPS to sell. The current PPS balance is:  "+ seller_pps_amount;
+				request.setAttribute("errorMessage", errorMsg);
+				request.getRequestDispatcher("user-buyPage.jsp").forward(request, response);
+				return;
+			}
 			
 		
 			

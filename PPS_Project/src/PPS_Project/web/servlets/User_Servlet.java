@@ -382,6 +382,15 @@ public class User_Servlet extends HttpServlet {
  // Default: show dashboard page
     private void showFollowingInfo (HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+    	
+    	HttpSession session = request.getSession(false);
+    	User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// User not signed in. Or session expired.
+			// Forward to user login page.
+			request.getRequestDispatcher("user-loginForm.jsp").forward(request, response);
+			return;
+		}
     	try {
     		String followingEmail = request.getParameter("followingEmail");
     		User FollowingUser = userDAO.selectUser(followingEmail);
@@ -424,24 +433,18 @@ public class User_Servlet extends HttpServlet {
     	} catch (Exception e) {
     		System.out.println(e);
     		RequestDispatcher dispatcher = request.getRequestDispatcher("user-followersPage.jsp");
-    		request.setAttribute("errorMessage", "Can not show following information");
+    		request.setAttribute("errorMessage", "Can not show the following information");
         	dispatcher.forward(request, response);
     		
     	}
-    	
-		//request.setAttribute("listUser", listUser);
-		//dispatcher.forward(request, response);
 	}
-    
-    
-    
     
     
     
     private void selectinfo (HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-    	String errorMessage = "";
-      	HttpSession session = request.getSession(false);
+      	
+    	HttpSession session = request.getSession(false);
     	User user = (User) session.getAttribute("user");
 		if (user == null) {
 			// User not signed in. Or session expired.
@@ -498,30 +501,23 @@ public class User_Servlet extends HttpServlet {
         else {
         	settinginfo.insert(7,'0');
         }
-    	System.out.println("thevalue of settinginfo   "+ settinginfo);
-    	 String settings=settinginfo.toString();
+    	System.out.println("the value of settinginfo   "+ settinginfo);
+    	String settings = settinginfo.toString();
     	
     	user.setUser_settings(settings);
-    	
     	userDAO.updateUserSetting(user);
+    	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("select_information.jsp");
-    	//String message = "??<br>";
-		//request.setAttribute("message", message);
+		request.setAttribute("message", "Settings updates are saved! <br>");
     	dispatcher.forward(request, response);
     	
-    	
-    	
-        	
-        		
     	} catch (Exception e) {
     		System.out.println(e);
     		RequestDispatcher dispatcher = request.getRequestDispatcher("select_information.jsp");
-    		request.setAttribute("errorMessage", "Error");
+    		request.setAttribute("errorMessage", "Couldn't update the settings");
         	dispatcher.forward(request, response);
     	}
-    	
-		//request.setAttribute("listUser", listUser);
-		//dispatcher.forward(request, response);
+    
 	}
     
     

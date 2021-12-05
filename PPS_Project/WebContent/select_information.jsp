@@ -71,18 +71,7 @@ String userName = user.getUser_fname() + " " + user.getUser_lname();
 			<h5 style="align: center; color:green"><%=((message == null) || (message.trim().equals(""))) ? "" : (message)%></h5>
 			
 			<br>
-			
-					
-
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
+	 			 
 					 <FORM ACTION="selectinfo" METHOD="post">
 		             <INPUT TYPE="CHECKBOX" NAME="check1" VALUE="check1" >
 		             Email
@@ -112,9 +101,7 @@ String userName = user.getUser_fname() + " " + user.getUser_lname();
 		            <BR>
 		            <INPUT TYPE="SUBMIT" VALUE="Submit">
 		        </FORM>
-		        
-   	
-			
+		
     </div> 
 				
 			</div>

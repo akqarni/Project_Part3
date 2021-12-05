@@ -186,7 +186,7 @@ public class DepositWithdraw_Servlet extends HttpServlet {
 				request.getRequestDispatcher("user-balancePage.jsp").forward(request, response);
 				return;
 			} else {
-				request.setAttribute("errorMessage", "No enough balance");
+				request.setAttribute("errorMessage", "No enough balance, Current balance: " + user.getDollar_balance()+ " $");
 				request.getRequestDispatcher("user-balancePage.jsp").forward(request, response);
 				return;
 			}
