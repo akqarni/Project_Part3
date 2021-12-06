@@ -89,7 +89,7 @@ body {
   <a href="neversell_user.jsp">Neversell users</a>
   <a href="root-luckyUsers.jsp">Lucky users</a>
   <a href="inactive_user.jsp">Inactive users</a>
-  <a href="#news">Statistics</a>
+  <a href="root-systemStatistics.jsp">Statistics</a>
   <a href="log-out">Logout</a>
 </div>
 

@@ -32,20 +32,41 @@ public class Root_part3_DAO {
 			+ "group by transaction_to_email\n"
 			+ ");";
 	private static final String SELECT_ALL_USERS_EMAILS  = "select email from users;";
+	
 	private static final String SELECT_COMMON_FOLLOWERS  = "Select f1.follower_email \n"
 			+ "from follows f1, follows f2\n"
 			+ "where f1.follower_email = f2.follower_email and f1.following_email = ? and f2.following_email = ?;";
-    private static final String select_biggest_buy   ="select * from transactions where transaction_name='buy'and  PPS_amount>=all(select PPS_amount from transactions)";
-	private static final String select_biggest_buyer ="select  transaction_to_email,sum(PPS_amount)from transactions where transaction_name='buy' group by transaction_to_email having sum(PPS_amount)>=all(select sum(PPS_amount) from transactions where transaction_name='buy' group by transaction_to_email)";
-	private static final String select_neverbuy_user ="select * from transactions where transaction_name='transfer' and transaction_to_email not in (select transaction_to_email from transactions where transaction_name='buy') group by transaction_to_email";
-	private static final String select_neversell_user="select * from transactions where transaction_name='buy' and transaction_to_email not in(select transaction_from_email from transactions where transaction_name='sell') group by transaction_to_email";
-	private static final String select_inactive_user="select * from users where email not in ((select transaction_from_email from transactions)union (select transaction_to_email from transactions))";
+	
+    private static final String SELECT_BIGGEST_BUY   ="select * from transactions "
+    		+ "where transaction_name='buy' and  PPS_amount >= all(select PPS_amount from transactions)";
+    
+	private static final String SELECT_BIGGEST_BUYERS = "select transaction_to_email, sum(PPS_amount) from transactions\n"
+			+ "where transaction_name='BUY' \n"
+			+ "group by transaction_to_email \n"
+			+ "having sum(PPS_amount) >= \n"
+			+ "all(select sum(PPS_amount) from transactions where transaction_name='BUY' group by transaction_to_email);";
+	
+	private static final String SELECT_NEVERBUY_USERS = "select * from transactions\n"
+			+ "where transaction_name='transfer' and transaction_to_email not in \n"
+			+ "(select transaction_to_email from transactions where transaction_name='BUY') \n"
+			+ "group by transaction_to_email;";
+	
+	private static final String SELECT_NEVERSELL_USERS = "select * from transactions\n"
+			+ "where transaction_name = 'BUY' and transaction_to_email not in\n"
+			+ "(select transaction_from_email from transactions where transaction_name='SELL') \n"
+			+ "group by transaction_to_email";
+	
+	private static final String SELECT_INACTIVE_USERS = "select * from users "
+			+ "where email not in "
+			+ "((select transaction_from_email from transactions) union (select transaction_to_email from transactions))";
+	
 	private static final String SELECT_LUCKY_USERS_EMAILS = "SELECT DISTINCT transaction_to_email from transactions t, follows f  \n"
 			+ "WHERE t.transaction_name = \"TRANSFER\" and NOT EXISTS  (\n"
 			+ "select follower_email from follows where t.transaction_name = \"TRANSFER\" and follower_email not in \n"
 			+ "           (select follower_email from transactions t1, follows f1\n"
 			+ "            where t.transaction_to_email = t1.transaction_to_email)\n"
 			+ ");";
+	
 	private static final String SELECT_POPULAR_USERS_EMAILS = "select following_email from follows\n"
 			+ "group by following_email \n"
 			+ "having count(follower_email) >= 5;";
@@ -54,7 +75,6 @@ public class Root_part3_DAO {
 	private static final String SELECT_BUYS_COUNT = "Select transaction_name, count(transaction_ID) as numberOfBuys from transactions\n"
 			+ "where transaction_name = \"BUY\"\n"
 			+ "group by transaction_name;";
-	
 	private static final String SELECT_SELLS_COUNT = "Select transaction_name, count(transaction_ID) as numberOfSells from transactions\n"
 			+ "where transaction_name = \"SELL\"\n"
 			+ "group by transaction_name;";
@@ -64,7 +84,7 @@ public class Root_part3_DAO {
 	private static final String SELECT_DEPOSITS_COUNT = "Select transaction_name, count(transaction_ID) as numberOfDeposits from transactions\n"
 			+ "where transaction_name = \"DEPOSIT\"\n"
 			+ "group by transaction_name;";
-	private static final String SELECT_WITHDRAWS_COUNT = "Select transaction_name, count(transaction_ID) as numberOfWithdraw from transactions\n"
+	private static final String SELECT_WITHDRAWS_COUNT = "Select transaction_name, count(transaction_ID) as numberOfWithdraws from transactions\n"
 			+ "where transaction_name = \"WITHDRAW\"\n"
 			+ "group by transaction_name;";
 	
@@ -214,7 +234,7 @@ public class Root_part3_DAO {
          
         connect_func();
          
-        preparedStatement = (PreparedStatement) connect.prepareStatement(select_biggest_buy);
+        preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_BIGGEST_BUY);
        
          
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -246,7 +266,7 @@ public class Root_part3_DAO {
          
         connect_func();
          
-        preparedStatement = (PreparedStatement) connect.prepareStatement(select_biggest_buyer);
+        preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_BIGGEST_BUYERS);
        
          
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -274,7 +294,7 @@ public class Root_part3_DAO {
          
         connect_func();
          
-        preparedStatement = (PreparedStatement) connect.prepareStatement(select_neverbuy_user);
+        preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_NEVERBUY_USERS);
        
         ResultSet resultSet = preparedStatement.executeQuery();
          
@@ -305,7 +325,7 @@ public class Root_part3_DAO {
           
          connect_func();
           
-         preparedStatement = (PreparedStatement) connect.prepareStatement(select_neversell_user);
+         preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_NEVERSELL_USERS);
         
           
          ResultSet resultSet = preparedStatement.executeQuery();
@@ -334,7 +354,7 @@ public class Root_part3_DAO {
    	 List<User> UserList = new ArrayList <User>(); 
          
         connect_func();  
-        preparedStatement = (PreparedStatement) connect.prepareStatement(select_inactive_user);    
+        preparedStatement = (PreparedStatement) connect.prepareStatement(SELECT_INACTIVE_USERS);    
         ResultSet rs = preparedStatement.executeQuery();
          
         while (rs.next()) {

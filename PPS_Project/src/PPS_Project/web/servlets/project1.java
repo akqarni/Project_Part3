@@ -119,28 +119,25 @@ public class project1 {
     	
     	// Intialize all tables
     	String intializeUserTable = "insert into users (email,pass,fname,lname,address,dob,PPS_balance,dollar_balance, setting) values"
-    			+ "('jbjb@yahoo.com','1234','Sahr','Ahmed','ctg','2012-11-12',0,0,10111111),"
-    			+ "('effat@gmail.com','1234','Effat','Fazel','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('jbxsjb@gmail.com','1234','Reem','','Alqarni','2012-11-12',0,0, 10111111),"
-    			+ "('gdfgd@gmail.com','1234','Rami','Saad','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('rofdgfgot@gmail.com','1234','Saad','AlAli','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('bit@gmail.com','1234','Afnan','Alqarni','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('tre@gmail.com','1234','Sara','Alix','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('ret@gmail.com','1234','Ali','Alzh','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('roofwert@gmail.com','1234','Ahmed','Oufi','ctg','2012-11-12',0,0, 10111111),"
-    			+ "('ef@gmail.com','1234','Roaa','Ali','ctg','2012-01-12',0,0, 10111111);";
+    			+ "('jbjb@yahoo.com','1234','Sahr','Ahmed','Saudi Arabia, Mecca 24250','2012-11-12',0,0,10111111),"
+    			+ "('effat@gmail.com','1234','Effat','Fazel','Dearborn, Michigan 48183','2012-11-12',0,0, 10111111),"
+    			+ "('jbxsjb@gmail.com','1234','Reem','Alqarni','Canton, Michigan 48183','2012-11-12',0,0, 10111111),"
+    			+ "('gdfgd@gmail.com','1234','Rami','Saad','Livonea, Michigan 48183','2012-11-12',0,0, 10111111),"
+    			+ "('rofdgfgot@gmail.com','1234','Saad','AlAli','Dearborn, Michigan 48183','2012-11-12',0,0, 10111111),"
+    			+ "('bit@gmail.com','1234','Afnan','Alqarni','Taylor, Michigan 48183','2012-11-12',0,0, 10111111),"
+    			+ "('tre@gmail.com','1234','Sara','Alix','Athens, Ohio 44341','2012-11-12',0,0, 10111111),"
+    			+ "('ret@gmail.com','1234','Ali','Alzh','Athens, Ohio 44341','2012-11-12',0,0, 10111111),"
+    			+ "('roofwert@gmail.com','1234','Ahmed','Saleh','Athens, Ohio 44341','2012-11-12',0,0, 10111111),"
+    			+ "('ef@gmail.com','1234','Roaa','Ali','Jeddah, Saudi Arabia 44341','2012-01-12',0,0, 10111111);";
     	
     	String intializeFollowTable = "insert into follows(follower_email,following_email) values"
     			+ "('ef@gmail.com','ret@gmail.com'), "
-    			+ "('ef1@gmail.com','ret2@gmail.com'),"
-    			+ "('yuu@gmail.com','hhgj@gmail.com'),"
-    			+ "('gjk@gmail.com','ret@gmail.com'),"
-    			+ "('efkn@gmail.com','poet@gmail.com'),"
-    			+ "('efat@gmail.com','ropet@gmail.com'),("
-    			+ "'ekhkf@gmail.com','rejkt@gmail.com'),"
-    			+ "('eoijhf@gmail.com','roiuhet@gmail.com'),"
-    			+ "('ekkjhf@gmail.com','repoiht@gmail.com'),"
-    			+ "('pooef@gmail.com','pomnret@gmail.com') ;";
+    			+ "('bit@gmail.com','ret@gmail.com'),"
+    			+ "('gdfgd@gmail.com','ret@gmail.com'),"
+    			+ "('bit@gmail.com','tre@gmail.com'),"
+    			+ "('rofdgfgot@gmail.com','ef@gmail.com'),"
+    			+ "('effat@gmail.com','bit@gmail.com'),"
+    			+ "('effat@gmail.com','tre@gmail.com')";
     	
     	String intializeTransactionsTable = "INSERT INTO transactions (transaction_name,transaction_date,transaction_time,dollar_amount,PPS_amount,transaction_from_email,transaction_to_email) VALUES "
     			+ "('effat',  '2018-11-12','13:30',1200,1234,'gdfgd@gmail.com','ret@gmail.com')"
@@ -171,7 +168,7 @@ public class project1 {
         
         // Execute all intialization statements
         statement.executeUpdate(intializeUserTable);
-      	//statement.executeUpdate(intializeFollowTable);
+      	statement.executeUpdate(intializeFollowTable);
       	//statement.executeUpdate(intializeTransactionsTable);
       	statement.executeUpdate(intializePPS_priceTable);
     
