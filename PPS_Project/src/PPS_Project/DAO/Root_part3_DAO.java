@@ -148,7 +148,7 @@ public class Root_part3_DAO {
        statement =  (Statement) connect.createStatement();
        
        // Step 3: execute
-       resultSet = statement.executeQuery(SELECT_LUCKY_USERS_EMAILS); 
+       resultSet = statement.executeQuery(SELECT_FREQUENT_USERS_EMAILS); 
         
        while (resultSet.next()) {
       	String email = resultSet.getString("transaction_to_email");
